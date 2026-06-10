@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>20 razones por las que te amo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="./corazon.jpg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;background:linear-gradient(135deg,#1a0a2e 0%,#2d1052 40%,#1a0a2e 100%);font-family:'Lato',sans-serif;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s)}
+  @keyframes twinkle{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+  .container{position:relative;z-index:1;text-align:center;padding:1.5rem;width:100%;max-width:440px}
+  .title-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,182,193,0.3);border-radius:24px;padding:2.2rem 2.5rem 2rem;backdrop-filter:blur(10px);animation:fadeUp .8s ease both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  .heart{font-size:2.2rem;display:block;margin-bottom:.6rem;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+  h1{font-family:'Playfair Display',serif;color:#fff;font-size:2.2rem;font-weight:600;line-height:1.2;margin-bottom:.3rem}
+  h1 span{color:#ffb6c1;font-style:italic}
+  .tagline{color:rgba(255,255,255,0.5);font-size:.85rem;font-weight:300;letter-spacing:.05em;margin-bottom:1.6rem}
+
+  /* INSTRUCCIONES */
+  .instrucciones{background:rgba(255,182,193,0.07);border:1px solid rgba(255,182,193,0.2);border-radius:16px;padding:1.2rem 1.4rem;margin-bottom:1.8rem;text-align:left}
+  .inst-title{color:#ffb6c1;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.9rem;text-align:center}
+  .inst-steps{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+  .inst-step{display:flex;align-items:flex-start;gap:.75rem}
+  .inst-dot{min-width:22px;height:22px;border-radius:50%;background:rgba(255,107,157,0.3);border:1px solid rgba(255,107,157,0.5);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#ffb6c1;margin-top:1px}
+  .inst-text{font-size:.82rem;color:rgba(255,255,255,0.75);line-height:1.5;font-weight:300}
+  .inst-text strong{color:#fff;font-weight:400}
+
+  .divider{width:50px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,182,193,0.4),transparent);margin:0 auto 1.6rem}
+
+  .cta-btn{display:inline-block;background:linear-gradient(135deg,#ff6b9d,#c44dff);color:#fff;font-family:'Lato',sans-serif;font-size:.9rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;padding:.85rem 2.2rem;border-radius:50px;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(255,107,157,0.4)}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,157,0.6)}
+
+  /* PAGE 2 */
+  #page-cartas{display:none;position:fixed;inset:0;background:linear-gradient(135deg,#1a0a2e 0%,#2d1052 40%,#1a0a2e 100%);overflow-y:auto;z-index:100;padding:2rem 1rem 4rem}
+  .cartas-header{text-align:center;margin-bottom:2rem}
+  .cartas-header h2{font-family:'Playfair Display',serif;color:#fff;font-size:1.6rem}
+  .cartas-header p{color:rgba(255,255,255,0.45);font-size:.8rem;margin-top:.3rem;font-weight:300}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.9rem;max-width:680px;margin:0 auto}
+  .sobre{border-radius:14px;padding:1.1rem .7rem;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem}
+  .sobre.locked{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);cursor:default}
+  .sobre.unlocked{background:rgba(255,107,157,0.12);border:1px solid rgba(255,107,157,0.35)}
+  .sobre.unlocked:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(255,107,157,0.3)}
+  .sobre.opened{background:rgba(196,77,255,0.12);border:1px solid rgba(196,77,255,0.35)}
+  .sobre.opened:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(196,77,255,0.3)}
+  .sobre-num{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:600}
+  .sobre-icon{font-size:1.6rem}
+  .sobre-label{font-size:.65rem;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,0.35)}
+  .sobre.unlocked .sobre-label{color:#ffb6c1}
+  .sobre.opened .sobre-label{color:#d4a0ff}
+
+  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;padding:1rem}
+  #modal.active{display:flex}
+  .modal-card{background:linear-gradient(135deg,#2d1052,#1a0a2e);border:1px solid rgba(255,107,157,0.4);border-radius:20px;padding:2.5rem;max-width:360px;width:100%;text-align:center;animation:pop .3s cubic-bezier(.34,1.56,.64,1) both}
+  @keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+  .modal-num{font-family:'Playfair Display',serif;font-size:.8rem;color:#ffb6c1;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem}
+  .modal-emoji{font-size:2.3rem;display:block;margin-bottom:.8rem}
+  .modal-text{font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;line-height:1.7;font-style:italic;margin-bottom:1.4rem}
+  .modal-close{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;font-family:'Lato',sans-serif;font-size:.8rem;padding:.55rem 1.6rem;border-radius:50px;cursor:pointer;letter-spacing:.08em;transition:background .2s}
+  .modal-close:hover{background:rgba(255,255,255,0.18)}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+
+<!-- PAGE 1 -->
+<div class="container" id="page-main">
+  <div class="title-card">
+    <span class="heart">💌</span>
+    <h1>Mira<br><span>aquí</span></h1>
+    <p class="tagline"></p>
+
+    <div class="instrucciones">
+      <p class="inst-title">✦ Cómo funciona tu regalo ✦</p>
+      <ul class="inst-steps">
+        <li class="inst-step">
+          <div class="inst-dot">1</div>
+          <p class="inst-text">Dentro encontrarás <strong>20 sobres numerados</strong>, uno por cada día. Los regalos tambien tienen un numero debes abrir uno por cada día.</p>
+        </li>
+        <li class="inst-step">
+          <div class="inst-dot">2</div>
+          <p class="inst-text">Cada día solo podrás abrir el sobre que corresponde a <strong>ese día</strong> — no antes 🔒 igual con los regalos.</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+    <button class="cta-btn" onclick="showCartas()">Abrir mi regalo →</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page-cartas">
+  <div class="stars" id="stars2"></div>
+  <div class="cartas-header">
+    <h2>20 Razones por las que te amo 💜</h2>
+    <p>Abre el sobre del día de hoy</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div id="modal">
+  <div class="modal-card">
+    <div class="modal-num" id="modal-num"></div>
+    <span class="modal-emoji" id="modal-emoji"></span>
+    <p class="modal-text" id="modal-text"></p>
+    <button class="modal-close" onclick="closeModal()">cerrar ✕</button>
+  </div>
+</div>
+
+<script>
+const razones=[
+  {emoji:"❤️⭐",texto:"Porque llenaste mi vida de luz y porque una parte de mi corazón siempre te pertenece."},
+  {emoji:"🕯️",texto:"Porque incluso en la oscuridad, siempre encuentro luz cuando pienso en ti."},
+  {emoji:"💌",texto:"Porque algunas cosas solo podían ser dichas con mi propia letra."},
+  {emoji:"🍫",texto:"PPorque contigo hasta los momentos simples tienen un sabor especial."},
+  {emoji:"🩹",texto:"Porque siempre encuentras la manera de sanar mis días difíciles."},
+  {emoji:"🍫",texto:"Porque haces mis días más dulces con solo existir."},
+  {emoji:"🌙",texto:"Porque aunque no siempre podamos estar juntos, compartimos el mismo cielo."},
+  {emoji:"📖",texto:"Porque eres uno de mis capítulos favoritos."},
+  {emoji:"🖊️",texto:"Porque quiero seguir escribiendo recuerdos contigo."},
+  {emoji:"🗝️",texto:"Porque me gusta acompañarte, aunque sea en los pequeños detalles de tu día."},
+  {emoji:"🐱",texto:"Porque me haces sonreír incluso cuando no estás cerca."},
+  {emoji:"⚽",texto:"Porque tu emoción por lo que amas siempre me contagia."},
+  {emoji:"🍬",texto:"Porque contigo nunca faltan las risas y los momentos divertidos."},
+  {emoji:"🎸",texto:"Porque cada talento tuyo me da una razón más para admirarte."},
+  {emoji:"📝",texto:"Porque hay sentimientos que no caben en una simple frase.Porque aprender de ti es uno de mis placeres favoritos en la vida."},
+  {emoji:"⚽",texto:"Porque amo verte disfrutar las cosas que te apasionan."},
+  {emoji:"🐱",texto:"Porque tu ternura aparece en los momentos más inesperados."},
+  {emoji:"👕",texto:"Porque hasta las cosas que te representan se vuelven especiales para mí."},
+  {emoji:"🧩",texto:"Porque llegaste a mi vida y encajaste donde nadie más pudo hacerlo."},
+  {emoji:"✨",texto:"Porque después de veinte razones, sigo descubriendo muchas más para elegirte cada día."},
+];
+
+const today=new Date().getDate();
+const openedMap=JSON.parse(localStorage.getItem('abiertos')||'{}');
+
+function makeStars(id){
+  const c=document.getElementById(id);
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*3+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*3}s`;
+    c.appendChild(s);
+  }
+}
+makeStars('stars');
+
+function showCartas(){
+  document.getElementById('page-main').style.display='none';
+  document.getElementById('page-cartas').style.display='block';
+  makeStars('stars2');renderGrid();
+}
+
+function renderGrid(){
+  const grid=document.getElementById('grid');grid.innerHTML='';
+  razones.forEach((_,i)=>{
+    const day=i+1,isUnlocked=day<=today,isOpened=openedMap[day];
+    const div=document.createElement('div');
+    div.className='sobre '+(isOpened?'opened':isUnlocked?'unlocked':'locked');
+    div.innerHTML=`<div class="sobre-num">${day}</div><div class="sobre-icon">${isOpened?'💜':isUnlocked?'💌':'🔒'}</div><div class="sobre-label">${isOpened?'leída':isUnlocked?'ábrelo':'día '+day}</div>`;
+    if(isUnlocked)div.onclick=()=>openCarta(day);
+    grid.appendChild(div);
+  });
+}
+
+function openCarta(day){
+  const r=razones[day-1];
+  document.getElementById('modal-num').textContent=`razón #${day}`;
+  document.getElementById('modal-emoji').textContent=r.emoji;
+  document.getElementById('modal-text').textContent=r.texto;
+  openedMap[day]=true;localStorage.setItem('abiertos',JSON.stringify(openedMap));
+  document.getElementById('modal').classList.add('active');renderGrid();
+}
+function closeModal(){document.getElementById('modal').classList.remove('active');}
+</script>
+</body>
+</html>
